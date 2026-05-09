@@ -15,14 +15,14 @@ typedef struct s_Engine
 		//che nel caso in cui non vada a buon fine restituisce GLFW_FALSE ossia 0
 		if (glfwInit() == GLFW_FALSE)
 		{
-			std::cerr << "[Struct.cpp]: GLFW initialization failed!";
+			std::cerr << "[structs.hpp->s_Engine]: GLFW initialization failed!";
 			exit(EXIT_FAILURE);
 		}
 
 		window = glfwCreateWindow(WIDTH, HEIGHT, "my gayme", nullptr, nullptr);
 		if (!window)
 		{
-			std::cerr << "[Struct.cpp]: glfw Window failed!";
+			std::cerr << "[structs.hpp->s_Engine]: glfw Window failed!";
 			glfwTerminate();
 			exit(EXIT_FAILURE);
 		}
@@ -33,6 +33,16 @@ typedef struct s_Engine
 		//che il contesto su cui lavorare è la finestra che sto creando, se non chiamassi questa funzione ogni chiamata
 		//ad una funzione OpenGL crasherebbe
 		glfwMakeContextCurrent(window);
+
+		//REVIEW - review da fininre
+		//GLAD ossia un automatismo che trova le funzioni nella gpu dato che vengono internpretata
+		//diversamente tra schede grafiche
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		{
+			std::cerr << "[structs.hpp->s_Engine]: GLAD initialization failed!";
+			glfwTerminate();
+			exit(EXIT_FAILURE);
+		}
 		
 		//REVIEW - Rendering Zone
 		//Definisce l'area in cui andrai a renderizzare qualsiasi costrutto grafico, i primi due parametri
@@ -44,3 +54,9 @@ typedef struct s_Engine
 } t_Engine;
 
 #endif
+
+// glfwInit()              	→ inizializza GLFW (nessuna GPU ancora)
+// glfwCreateWindow()      	→ crea finestra + contesto OpenGL
+// glfwMakeContextCurrent()	→ attiva il contesto su questo thread
+// gladLoadGLLoader()      	→ ora che il contesto esiste, carica tutte le funzioni GL
+// glViewport()            	→ ora puoi chiamare funzioni GL moderne

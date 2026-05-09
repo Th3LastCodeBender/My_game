@@ -8,9 +8,13 @@ DEV_FLAGS = -g -D_GLIBCXX_DEBUG -O0 #Flags per lo sviluppo
 CPPVER = -std=c++20 #scelta questa versione di cpp come compromesso tra compatibilità con opengl e feature di cpp
 LIBS = -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl #librerie per far funzionare opengl
 
-SRCS = main.cpp
+INCLUDES = -I./includes
+CPP_SRCS = $(addprefix src/, main.cpp)
+C_SRCS   = $(addprefix src/, glad.c)
 OBJ_DIR = build
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o)) #regola per la creazione degli oggetti, quando il progetto sarà grosso farà molto comodo
+CPP_OBJ = $(addprefix $(OBJ_DIR)/, $(CPP_SRCS:.cpp=.o))
+C_OBJ   = $(addprefix $(OBJ_DIR)/, $(C_SRCS:.c=.o))
+OBJ  = $(CPP_OBJ) $(C_OBJ)
 DEPS = $(OBJ:.o=.d) #regola per la creazione di file dipendenze .d utilissimi per quando ci saranno tanti header inclusi ovunque così da non essere costretti a fare make re e run tutte le volte che si modifica un header
 
 ACTIVE_FLAGS = $(DEV_FLAGS)
@@ -22,7 +26,11 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) $(CPPVER) $(DEPFLAGS) $(ACTIVE_FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(CPPVER) $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	gcc $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(CPPVER) $(DEPFLAGS) -o $(NAME) $^ $(LIBS)
