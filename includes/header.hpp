@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 #include "macros.hpp"
 #include "Engine.hpp"

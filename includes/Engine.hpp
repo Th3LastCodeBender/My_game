@@ -63,6 +63,12 @@ typedef struct s_Engine
 		lastTime = getDeltaTime();
 	}
 
+	~s_Engine()
+	{
+		glfwDestroyWindow(window);
+		glfwTerminate();
+	}
+
 	float getDeltaTime()
 	{
 		float currentTime = glfwGetTime();

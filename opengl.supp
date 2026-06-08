@@ -1,0 +1,130 @@
+{
+   nvidia_realloc_zero
+   Memcheck:ReallocZero
+   fun:realloc
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+   fun:dl_open_worker
+   fun:_dl_catch_exception
+   fun:_dl_open
+}
+{
+   nvidia_posix_memalign_zero
+   Memcheck:UnsafeZeroSize
+   fun:posix_memalign
+   obj:/usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.580.159.03
+   obj:*
+   fun:call_init.part.0
+   fun:call_init
+   fun:_dl_init
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+   fun:dl_open_worker
+   fun:_dl_catch_exception
+   fun:_dl_open
+}
+{
+   dlopen_find_object_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:malloc
+   fun:_dl_find_object_update
+   fun:dl_open_worker_begin
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+   fun:_dl_catch_exception
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_exception
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:dlopen_implementation
+   fun:dlopen@@GLIBC_2.34
+}
+{
+   dbus_leak_via_pending_call
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   ...
+   fun:dbus_pending_call_block
+   fun:dbus_connection_send_with_reply_and_block
+   ...
+}
+{
+   dbus_bus_register_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.19.13
+   fun:_dbus_message_loader_queue_messages
+   ...
+   fun:dbus_bus_register
+   obj:/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.19.13
+}
+{
+   glfw_init_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:glfwInit
+   ...
+}
+{
+   glfw_create_window_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:glfwCreateWindow
+   ...
+}
+{
+   dlopen_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_open
+}
+{
+   nvidia_dl_init_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_init
+   ...
+}
+{
+   libx11_locale_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_XlcCreateLC
+   ...
+}
+{
+   libx11_xrm_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:XrmGetStringDatabase
+   ...
+}
+{
+   dlclose_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:dlclose@@GLIBC_2.34
+   ...
+}

@@ -61,6 +61,11 @@ re: fclean all
 gdb: $(NAME)
 	clear ; gdb ./$(NAME)
 
+# "still reachable" da libglfw/libX11/libnvidia è rumore di sistema, non bug del tuo codice.
+# Per rigenerare le soppressioni: valgrind --gen-suppressions=all ./$(NAME) 2>&1 | awk '/^\{/,/^\}/' > opengl.supp
+val: all
+	clear; valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --num-callers=30 --suppressions=opengl.supp --error-exitcode=1 ./$(NAME)
+
 
 rum: $(NAME)
 	@clear
@@ -73,4 +78,4 @@ rum: $(NAME)
 
 -include $(DEPS)
 
-.PHONY: all run rerun relrun rerelrun clean fclean re gdb rum 
+.PHONY: all run rerun relrun rerelrun clean fclean re gdb rum val
