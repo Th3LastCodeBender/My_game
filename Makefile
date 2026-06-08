@@ -1,6 +1,7 @@
-NAME = game
+NAME = TestGL
 
-CC = c++
+CC = gcc
+CC++ = c++
 FLAGS = -Werror -Wextra -Wall
 DEPFLAGS = -MMD -MP #creaazione dei file .d
 REL_FLAGS = -g -O2 -DNDEBUG #la flag O2 è un buon compromesso tra velocità e affidabilità DNDEBUG ignora le chiamate ad assert
@@ -26,14 +27,14 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) $(CPPVER) $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
+	$(CC++) $(FLAGS) $(CPPVER) $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	gcc $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(DEPFLAGS) $(ACTIVE_FLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(CPPVER) $(DEPFLAGS) -o $(NAME) $^ $(LIBS)
+	$(CC++) $(FLAGS) $(CPPVER) $(DEPFLAGS) -o $(NAME) $^ $(LIBS)
 
 run: all
 	clear; ./$(NAME)
@@ -44,7 +45,7 @@ rerun:
 
 relrun: ACTIVE_FLAGS = $(REL_FLAGS)
 relrun: $(OBJ)
-	$(CC) $(FLAGS) $(CPPVER) -o $(NAME) $^
+	$(CC++) $(FLAGS) $(CPPVER) -o $(NAME) $^
 	clear; ./$(NAME)
 
 rerelrun: fclean relrun

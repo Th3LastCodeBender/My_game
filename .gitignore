@@ -1,0 +1,16 @@
+# Video files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+VideosTut/
+
+# Build artifacts
+build/
+*.o
+*.d
+
+# Binaries
+game
+TestGL

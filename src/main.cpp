@@ -1,12 +1,27 @@
 #include "../includes/header.hpp"
+// https://docs.gl/
 
 t_Engine engine;
 
 int main()
 {
+	unsigned int	buffer;
+	float			positions[6] = {
+						-0.5f, -0.5f,
+						 0.0f,  0.5f,
+						-0.5f,  0.5f
+					};
+
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, (6 * sizeof(float)), positions, GL_STATIC_DRAW);
+
 	//REVIEW - glfwWindowShouldClose() GLFW setta una flag interna quando l'utente schiaccia la x di chiusura
 	while (!glfwWindowShouldClose(engine.window))
 	{
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		/*REVIEW - Double Buffering con glfwSwapBuffers()
 		Utilizzo di double buffering:
 			-La GPU disegna su un buffer "nascosto" mentre ne viene mostrato uno "visibile" dal monitor ossia quello già disegnato
