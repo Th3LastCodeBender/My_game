@@ -55,12 +55,12 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-"C_Cpp_Runner.msvcSecureNoWarnings": false,
-"makefile.launchConfigurations": [
-	{
-		"cwd": "/home/magico/Desktop/42/gitspace/OpenGL",
-		"binaryPath": "/home/magico/Desktop/42/gitspace/OpenGL/TestGL",
-		"binaryArgs": []
-	}
-]
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "/home/magico/Desktop/42/gitspace/OpenGL",
+      "binaryPath": "/home/magico/Desktop/42/gitspace/OpenGL/TestGL",
+      "binaryArgs": []
+    }
+  ]
 }
